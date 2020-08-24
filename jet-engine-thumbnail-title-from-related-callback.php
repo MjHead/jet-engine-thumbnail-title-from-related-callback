@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: JetEngine - Thu
+ * Plugin Name: JetEngine - Related posts HTML list
  * Plugin URI:  #
  * Description: Adds new callback to Dynamic Field widget, which allows to output related posts lists for the current posts in the Thumbnail + Title format.
  * Version:     1.0.0
