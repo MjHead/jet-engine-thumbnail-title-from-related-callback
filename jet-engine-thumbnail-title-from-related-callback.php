@@ -50,3 +50,5 @@ function jet_engine_rel_thumb_callback( $posts ) {
 	return $result;
 
 }
+
+add_filter( 'jet-engine/listings/allowed-callbacks', 'jet_engine_add_rel_callback' );
