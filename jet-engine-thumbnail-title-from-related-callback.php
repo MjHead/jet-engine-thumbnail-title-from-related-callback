@@ -17,36 +17,36 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Add "Get thumb and title from related" callback into available callbacks list
+ * Return thumbnail and post title for passed related posts list
  */
-function jet_engine_add_rel_callback( $callbacks ) {
-	$callbacks['jet_engine_rel_thumb_callback'] = 'Get thumb and title from related posts';
-	return $callbacks;
-}
+add_action( 'jet-engine/callbacks/register', function( $callbacks ) {
 
-/**
- * Return thumbnail and post title for pased related posts list
- */
-function jet_engine_rel_thumb_callback( $posts ) {
+	$args = array();
+	
+	$callbacks->register_callback( 'jec_rel_thumb_callback', 'Get thumb and title from related posts', $args );
 
-	if ( empty( $posts ) ) {
-		return;
-	}
-
-	$result = '';
-
-	foreach ( $posts as $post_id ) {
-
-		if ( ! has_post_thumbnail( $post_id ) ) {
-			continue;
+	function jec_rel_thumb_callback( $posts ) {
+		
+		if ( empty( $posts ) ) {
+			return;
 		}
 
-		$result .= '<div class="rel-post-wrap">';
-		$result .= get_the_post_thumbnail( $post_id, 'full', array( 'alt' => get_the_title( $post_id ) ) );
-		$result .= '<div class="rel-post-title">' . get_the_title( $post_id ) . '</div>';
-		$result .= '</div>';
+		$result = '';
+
+		foreach ( $posts as $post_id ) {
+
+			if ( ! has_post_thumbnail( $post_id ) ) {
+				continue;
+			}
+
+			$result .= '<div class="rel-post-wrap">';
+			$result .= get_the_post_thumbnail( $post_id, 'full', array( 'alt' => get_the_title( $post_id ) ) );
+			$result .= '<div class="rel-post-title">' . get_the_title( $post_id ) . '</div>';
+			$result .= '</div>';
+		}
+
+		return $result;
+		
 	}
 
-	return $result;
-
-}
+} );
